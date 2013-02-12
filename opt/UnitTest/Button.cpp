@@ -82,4 +82,6 @@ class Button : public GUnit
 
 };
 
-//DEFINE_UNIT_TEST( Button, L"Button" );
+
+
+// DEFINE_UNIT_TEST( Button, L"Button" );

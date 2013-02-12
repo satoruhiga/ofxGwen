@@ -50,7 +50,7 @@ GWEN_CONTROL_CONSTRUCTOR( UnitTest )
 	{	
 		Controls::CollapsibleCategory* cat = pList->Add( "Basic" );
 
-//		ADD_UNIT_TEST( Button );
+		// ADD_UNIT_TEST( Button );
 		ADD_UNIT_TEST( Label );
 		ADD_UNIT_TEST( LabelMultiline );
 	}
