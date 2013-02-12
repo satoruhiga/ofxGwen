@@ -35,6 +35,7 @@ Gwen::Renderer::OpenGL* ofxGwen::createRenderer()
 Gwen::Skin::Base* ofxGwen::createSkin(Gwen::Renderer::OpenGL *renderer)
 {
 	Gwen::Skin::TexturedBase *skin = new Gwen::Skin::TexturedBase(renderer);
+	
 	skin->Init("DefaultSkin.png");
 	skin->SetDefaultFont(L"/Library/Fonts/Arial.ttf", 11);
 	
