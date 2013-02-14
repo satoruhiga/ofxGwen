@@ -178,57 +178,28 @@ void ofxGwen::keyPressed(ofKeyEventArgs& e)
 			KEY_MAP(OF_KEY_END, Gwen::Key::End);
 			
 //			// FIXME: Currently doesn't work
-//			KEY_MAP(OF_KEY_CTRL, Gwen::Key::Control);
-//			KEY_MAP(OF_KEY_ALT, Gwen::Key::Alt);
+			KEY_MAP(OF_KEY_CTRL, 0); // Gwen::Key::Control
+			KEY_MAP(OF_KEY_ALT, 0); // Gwen::Key::Alt
 		default:
 			break;
 	}
 	
 #undef KEY_MAP
+	
+	if (k == 0 || e.key == ' ')
+	{
+		canvas->InputCharacter(e.key);
+	}
 	
 	if (k != 0)
 	{
 		canvas->InputKey(k, true);
+		canvas->InputKey(k, false);
 	}
-	else
-		canvas->InputCharacter(e.key);
 }
 
 void ofxGwen::keyReleased(ofKeyEventArgs& e)
 {
-	assert(canvas);
-
-	unsigned char k = 0;
-	
-#define KEY_MAP(ofKey, gwenKey) case ofKey: { k = gwenKey; break; }
-	
-	switch (e.key) {
-			KEY_MAP(OF_KEY_LEFT, Gwen::Key::Left);
-			KEY_MAP(OF_KEY_RIGHT, Gwen::Key::Right);
-			KEY_MAP(OF_KEY_UP, Gwen::Key::Up);
-			KEY_MAP(OF_KEY_DOWN, Gwen::Key::Down);
-			
-			KEY_MAP(OF_KEY_RETURN, Gwen::Key::Return);
-			KEY_MAP(OF_KEY_BACKSPACE, Gwen::Key::Backspace);
-			KEY_MAP(OF_KEY_DEL, Gwen::Key::Delete);
-			
-			KEY_MAP('\t', Gwen::Key::Tab);
-			KEY_MAP(' ', Gwen::Key::Space);
-			
-			KEY_MAP(OF_KEY_HOME, Gwen::Key::Home);
-			KEY_MAP(OF_KEY_END, Gwen::Key::End);
-			
-//			// FIXME: Currently doesn't work
-//			KEY_MAP(OF_KEY_CTRL, Gwen::Key::Control);
-//			KEY_MAP(OF_KEY_ALT, Gwen::Key::Alt);
-		default:
-			break;
-	}
-	
-#undef KEY_MAP
-	
-	if (e.key != 0)
-		canvas->InputKey(k, false);
 }
 
 void ofxGwen::windowResized(ofResizeEventArgs &e)
