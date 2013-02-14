@@ -27,7 +27,12 @@ void ofxGwen::setup()
 
 Gwen::Renderer::OpenGL* ofxGwen::createRenderer()
 {
+#ifdef OFXGWEN_USE_OFX_FONTSTASH
+	Gwen::Renderer::OpenGL* renderer = new Gwen::Renderer::OpenFrameworks<Gwen::Renderer::ofxFontStashFontRenderer>;
+#else
 	Gwen::Renderer::OpenGL* renderer = new Gwen::Renderer::OpenFrameworks<Gwen::Renderer::ofBitmapFontRenderer>;
+#endif
+
 	renderer->Init();
 	return renderer;
 }
@@ -35,9 +40,10 @@ Gwen::Renderer::OpenGL* ofxGwen::createRenderer()
 Gwen::Skin::Base* ofxGwen::createSkin(Gwen::Renderer::OpenGL *renderer)
 {
 	Gwen::Skin::TexturedBase *skin = new Gwen::Skin::TexturedBase(renderer);
-	
 	skin->Init("DefaultSkin.png");
 	skin->SetDefaultFont(L"/Library/Fonts/Arial.ttf", 11);
+
+//	Gwen::Skin::Simple *skin = new Gwen::Skin::Simple(renderer);
 	
 	skin->SetRender(renderer);
 	return skin;

@@ -6,12 +6,15 @@
 #include "Gwen/Renderers/OpenGL.h"
 #include "Gwen/Texture.h"
 
+#define OFXGWEN_USE_OFX_FONTSTASH
+
 namespace Gwen
 {
 	namespace Renderer
 	{
 		class ofBitmapFontRenderer;
 		class ofTrueTypeFontRenderer;
+		class ofxFontStashFontRenderer;
 		
 		template <typename FontRenderer = ofTrueTypeFontRenderer>
 		class OpenFrameworks;
@@ -132,6 +135,71 @@ struct Gwen::Renderer::ofBitmapFontRenderer
 		return Gwen::Point(x, y);
 	}
 };
+
+#ifdef OFXGWEN_USE_OFX_FONTSTASH
+
+#include "ofxFontStash.h"
+
+struct Gwen::Renderer::ofxFontStashFontRenderer
+{
+public:
+	
+	static void LoadFont(Gwen::Renderer::Base *renderer, Gwen::Font* font)
+	{
+		font->realsize = font->size * renderer->Scale();
+		
+		ofxFontStash *pFont = new ofxFontStash;
+		pFont->setup(Utility::UnicodeToString(font->facename));
+		
+		font->data = pFont;
+	}
+	
+	static void FreeFont(Gwen::Renderer::Base *renderer, Gwen::Font* pFont)
+	{
+		if (!pFont->data) return;
+		
+		ofxFontStash* font = ((ofxFontStash*)pFont->data);
+		delete font;
+		
+		pFont->data = NULL;
+	}
+	
+	static void RenderText(Gwen::Renderer::Base *renderer, Gwen::Font* pFont, Gwen::Point pos, const Gwen::UnicodeString& text)
+	{
+		if (!pFont->data || fabs(pFont->realsize - pFont->size * renderer->Scale()) > 2)
+		{
+			FreeFont(renderer, pFont);
+			LoadFont(renderer, pFont);
+		}
+		
+		string content = Utility::UnicodeToString(text);
+		
+		ofxFontStash* font = (ofxFontStash*)(pFont->data);
+		ofRectangle rect = font->getBoundingBoxSize(content, pFont->size * renderer->Scale(), 0, 0);
+		
+		pos.x -= rect.x;
+		pos.y -= rect.y;
+		
+		renderer->Translate(pos.x, pos.y);
+		font->drawMultiLine(content, pFont->size * renderer->Scale(), pos.x, pos.y);
+	}
+	
+	static Gwen::Point MeasureText(Gwen::Renderer::Base *renderer, Gwen::Font* pFont, const Gwen::UnicodeString& text)
+	{
+		if (!pFont->data || fabs(pFont->realsize - pFont->size * renderer->Scale()) > 2)
+		{
+			FreeFont(renderer, pFont);
+			LoadFont(renderer, pFont);
+		}
+		
+		ofxFontStash* font = (ofxFontStash*)(pFont->data);
+		
+		ofRectangle rect = font->getBoundingBoxSizeMultiLine(Utility::UnicodeToString(text), pFont->size * renderer->Scale(), 0, 0);
+		return Gwen::Point(rect.width + fabs(rect.x), rect.height);
+	}
+};
+
+#endif
 
 //
 

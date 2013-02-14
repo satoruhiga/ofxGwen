@@ -102,6 +102,8 @@
 		609A695216CADCB000C0AB22 /* UnitTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A68F016CADCB000C0AB22 /* UnitTest.cpp */; };
 		609A695316CADCB000C0AB22 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A68F116CADCB000C0AB22 /* Window.cpp */; };
 		609A695416CADCB000C0AB22 /* ofxGwen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A68F316CADCB000C0AB22 /* ofxGwen.cpp */; };
+		60CFE11916CC8A20000050C8 /* fontstash.c in Sources */ = {isa = PBXBuildFile; fileRef = 60CFE10F16CC8A20000050C8 /* fontstash.c */; };
+		60CFE11A16CC8A20000050C8 /* ofxFontStash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60CFE11516CC8A20000050C8 /* ofxFontStash.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -357,6 +359,12 @@
 		609A68F316CADCB000C0AB22 /* ofxGwen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxGwen.cpp; sourceTree = "<group>"; };
 		609A68F416CADCB000C0AB22 /* ofxGwen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxGwen.h; sourceTree = "<group>"; };
 		609A68F516CADCB000C0AB22 /* ofxGwenRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxGwenRenderer.h; sourceTree = "<group>"; };
+		60CFE10F16CC8A20000050C8 /* fontstash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fontstash.c; sourceTree = "<group>"; };
+		60CFE11016CC8A20000050C8 /* fontstash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fontstash.h; sourceTree = "<group>"; };
+		60CFE11116CC8A20000050C8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		60CFE11216CC8A20000050C8 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		60CFE11516CC8A20000050C8 /* ofxFontStash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFontStash.cpp; sourceTree = "<group>"; };
+		60CFE11616CC8A20000050C8 /* ofxFontStash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFontStash.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -796,9 +804,40 @@
 			path = ../src;
 			sourceTree = "<group>";
 		};
+		60CFE10816CC8A20000050C8 /* ofxFontStash */ = {
+			isa = PBXGroup;
+			children = (
+				60CFE10E16CC8A20000050C8 /* lib */,
+				60CFE11416CC8A20000050C8 /* src */,
+			);
+			name = ofxFontStash;
+			path = ../../ofxFontStash;
+			sourceTree = "<group>";
+		};
+		60CFE10E16CC8A20000050C8 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				60CFE10F16CC8A20000050C8 /* fontstash.c */,
+				60CFE11016CC8A20000050C8 /* fontstash.h */,
+				60CFE11116CC8A20000050C8 /* README.md */,
+				60CFE11216CC8A20000050C8 /* stb_truetype.h */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		60CFE11416CC8A20000050C8 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				60CFE11516CC8A20000050C8 /* ofxFontStash.cpp */,
+				60CFE11616CC8A20000050C8 /* ofxFontStash.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				60CFE10816CC8A20000050C8 /* ofxFontStash */,
 				609A681216CADCA400C0AB22 /* ofxGwen */,
 			);
 			name = addons;
@@ -1061,6 +1100,8 @@
 				609A695216CADCB000C0AB22 /* UnitTest.cpp in Sources */,
 				609A695316CADCB000C0AB22 /* Window.cpp in Sources */,
 				609A695416CADCB000C0AB22 /* ofxGwen.cpp in Sources */,
+				60CFE11916CC8A20000050C8 /* fontstash.c in Sources */,
+				60CFE11A16CC8A20000050C8 /* ofxFontStash.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

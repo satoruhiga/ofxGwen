@@ -2,6 +2,10 @@
 
 #include "ofMain.h"
 
+#include "Gwen/Gwen.h"
+#include "Gwen/Controls.h"
+#include "Gwen/Controls/Properties.h"
+
 #include "ofxGwenRenderer.h"
 
 class ofxGwen
