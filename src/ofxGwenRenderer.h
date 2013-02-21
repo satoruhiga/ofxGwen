@@ -6,7 +6,7 @@
 #include "Gwen/Renderers/OpenGL.h"
 #include "Gwen/Texture.h"
 
-#define OFXGWEN_USE_OFX_FONTSTASH
+//#define OFXGWEN_USE_OFX_FONTSTASH
 
 namespace Gwen
 {
@@ -98,6 +98,9 @@ struct Gwen::Renderer::ofBitmapFontRenderer
 		pos.y += BITMAP_CHAR_HEIGHT;
 
 		renderer->Translate(pos.x, pos.y);
+		
+		// FIXME: define custom skin
+		ofSetColor(0, 255);
 		ofDrawBitmapString(Utility::UnicodeToString(text), pos.x, pos.y);
 	}
 	

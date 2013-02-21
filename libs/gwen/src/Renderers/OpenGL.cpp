@@ -8,7 +8,7 @@
 #include <math.h>
 
 #include "GL/glew.h"
-#include "FreeImage.h"
+#include "FreeImage/FreeImage.h"
 
 
 namespace Gwen

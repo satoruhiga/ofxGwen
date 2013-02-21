@@ -15,7 +15,7 @@ public:
 	ofxGwen();
 	virtual ~ofxGwen();
 	
-	void setup();
+	void setup(const string& default_font = "", const string& skin_texture_path = "");
 	
 	Gwen::Controls::Canvas* getCanvas() const { return canvas; }
 
@@ -52,8 +52,8 @@ protected:
 	Gwen::Skin::Base *skin;
 	Gwen::Controls::Canvas* canvas;
 	
-	virtual Gwen::Renderer::OpenGL *createRenderer();
-	virtual Gwen::Skin::Base *createSkin(Gwen::Renderer::OpenGL *renderer);
+	virtual Gwen::Renderer::OpenGL *createRenderer(bool use_truetype_font = true);
+	virtual Gwen::Skin::Base *createSkin(Gwen::Renderer::OpenGL *renderer, const string& default_font = "", const string& skin_texture_path = "");
 	virtual Gwen::Controls::Canvas *createCanvas();
 	
 private:

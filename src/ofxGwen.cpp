@@ -13,37 +13,59 @@ ofxGwen::~ofxGwen()
 	
 }
 
-void ofxGwen::setup()
+void ofxGwen::setup(const string& default_font, const string& skin_texture_path)
 {
 	show();
 	enableAllEvents();
 	
-	renderer = createRenderer();
-	skin = createSkin(renderer);
+	if (default_font == "")
+		renderer = createRenderer(false);
+	else
+		renderer = createRenderer(true);
+		
+	skin = createSkin(renderer, default_font, skin_texture_path);
 	canvas = createCanvas();
 }
 
 //
 
-Gwen::Renderer::OpenGL* ofxGwen::createRenderer()
+Gwen::Renderer::OpenGL* ofxGwen::createRenderer(bool use_truetype_font)
 {
+	Gwen::Renderer::OpenGL* renderer = NULL;
+	
+	if (use_truetype_font)
+	{
 #ifdef OFXGWEN_USE_OFX_FONTSTASH
-	Gwen::Renderer::OpenGL* renderer = new Gwen::Renderer::OpenFrameworks<Gwen::Renderer::ofxFontStashFontRenderer>;
+		renderer = new Gwen::Renderer::OpenFrameworks<Gwen::Renderer::ofxFontStashFontRenderer>;
 #else
-	Gwen::Renderer::OpenGL* renderer = new Gwen::Renderer::OpenFrameworks<Gwen::Renderer::ofBitmapFontRenderer>;
+		renderer = new Gwen::Renderer::OpenFrameworks<Gwen::Renderer::ofTrueTypeFontRenderer>;
 #endif
+	}
+	else
+	{
+		renderer = new Gwen::Renderer::OpenFrameworks<Gwen::Renderer::ofBitmapFontRenderer>;
+	}
 
 	renderer->Init();
 	return renderer;
 }
 
-Gwen::Skin::Base* ofxGwen::createSkin(Gwen::Renderer::OpenGL *renderer)
+Gwen::Skin::Base* ofxGwen::createSkin(Gwen::Renderer::OpenGL *renderer, const string& default_font, const string& skin_texture_path)
 {
-	Gwen::Skin::TexturedBase *skin = new Gwen::Skin::TexturedBase(renderer);
-	skin->Init("DefaultSkin.png");
-	skin->SetDefaultFont(L"/Library/Fonts/Arial.ttf", 11);
-
-//	Gwen::Skin::Simple *skin = new Gwen::Skin::Simple(renderer);
+	Gwen::Skin::Base *skin = NULL;
+	
+	if (skin_texture_path.empty())
+	{
+		skin = new Gwen::Skin::Simple(renderer);
+	}
+	else
+	{
+		Gwen::Skin::TexturedBase *textured = new Gwen::Skin::TexturedBase(renderer);
+		textured->Init(skin_texture_path);
+		textured->SetDefaultFont(Gwen::Utility::StringToUnicode(default_font), 11);
+		
+		skin = textured;
+	}
 	
 	skin->SetRender(renderer);
 	return skin;
