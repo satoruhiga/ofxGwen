@@ -115,13 +115,13 @@ void ofxGwen::disableAllEvents()
 void ofxGwen::show()
 {
 	visible = true;
-	disableAllEvents();
+	enableAllEvents();
 }
 
 void ofxGwen::hide()
 {
 	visible = false;
-	enableAllEvents();
+	disableAllEvents();
 }
 
 // events
